@@ -1,0 +1,101 @@
+
+
+#include<stdio.h>
+int a[10][10],n;
+
+
+int rec(int i,int j)
+{
+    
+    
+    if(a[i+1][j]==1  && (i+1)<n)
+    {a[i+1][j]=0;
+        i=i+1;
+        
+        rec(i,j);
+    }
+    if(a[i][j+1]==1  && (j+1)<n)
+    {a[i][j+1]=0;
+        j=j+1;
+        
+        rec(i,j);
+    }
+    if(a[i][j-1]==1  && (j-1)>=0)
+    {a[i][j-1]=0;
+        j=j-1;
+        
+        rec(i,j);
+    }
+    if(a[i-1][j]==1  && (i-1)>=0)
+    {a[i-1][j]=0;
+        i=i-1;
+        
+        rec(i,j);
+    }
+    if(a[i-1][j-1]==1 && (i-1)>=0 && (j-1)>=0)
+    {a[i-1][j-1]=0;
+        i=i-1;
+        j=j-1;
+        
+        rec(i,j);
+    }
+    if(a[i+1][j+1]==1 && (i+1)<n && (j+1)<n)
+    {a[i+1][j+1]=0;
+        i=i+1;
+        j=j+1;
+        
+        rec(i,j);
+    }
+    if(a[i+1][j-1]==1 && (i+1)<n && (j-1)>=0)
+    {a[i+1][j-1]=0;
+        i=i+1;
+        j=j-1;
+        
+        rec(i,j);
+    }
+    if(a[i-1][j+1]==1 && (i-1)>=0 && (j+1)<n)
+    {a[i-1][j+1]=0;
+        i=i-1;
+        j=j+1;
+        
+        rec(i,j);
+    }
+    
+
+    return(0);
+}
+
+
+
+
+
+
+int main()
+{
+    int i,j,worm=0;
+    scanf("%d",&n);
+    for(i=0;i<n;i++)
+    {
+        for(j=0;j<n;j++)
+            scanf("%d",&a[i][j]);
+    }
+    for(i=0;i<n;i++)
+    {
+        for(j=0;j<n;j++)
+        {
+            if(a[i][j]==1)
+            {
+               
+                a[i][j]=0;
+                rec(i,j);
+                 worm++;
+            
+           }
+       }
+    }
+   
+        printf("%d",worm);
+    
+    return(0);
+
+}
