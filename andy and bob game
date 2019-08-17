@@ -1,0 +1,121 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+
+int main() {
+    int t;
+    cin >> t;
+    while (t--) {
+        int n;
+        cin >> n;
+        int k = 0, x = 0, y;
+        for(int i=0;i<n;i++){
+            cin >> y;
+            if (x < y) {
+                k++;
+                x = y;
+            }
+        }
+        if (k%2 == 1) 
+            cout << "BOB\n";
+        else
+            cout << "ANDY\n";  
+    }
+    return 0;
+}
+
+
+
+///My implementation of code using linked list
+
+
+#include<stdio.h>
+#include<stdlib.h>
+struct node
+{
+    long long int data;
+    struct node *next;
+};
+
+typedef struct node nod;
+
+int main()
+{
+    
+    int t,n,i;
+    long long int a;
+    scanf("%d",&t);
+    while(t--)
+    {
+        scanf("%d",&n);
+        nod *root;
+        nod *ptr;
+        root=NULL;
+        for(i=0;i<n;i++)
+        {
+            scanf("%lld",&a);
+            nod *temp;
+            temp=(nod*)malloc(sizeof(nod));
+            temp->data=a;
+            temp->next=NULL;
+            if(root==NULL)
+            {
+                
+                root=temp;
+                ptr=root;
+            }
+            else
+            {
+
+                ptr->next=temp;
+                ptr=ptr->next;
+            }
+
+        }
+        int cnt=0;
+        long long int max=-99999;
+        nod *curr;
+        while(root!=NULL)
+        {
+            max = 0;
+            curr = NULL;
+            ptr=root;
+            while(ptr->next!=NULL)
+            {
+                if(ptr->data > ptr->next->data && ptr==root)
+                {
+                    max=ptr->data;
+                    curr=NULL;
+                }
+                else if(ptr->next->data>max)
+                {
+                    curr=ptr;
+                    max=ptr->next->data;
+                }
+                ptr=ptr->next;
+            }
+            cnt++;
+            if (curr == NULL)
+                root = NULL;
+            else
+                curr->next=NULL;
+        }
+        if(cnt%2==0)
+        {
+            printf("ANDY\n");
+        }
+        else
+        {
+            printf("BOB\n");
+        }
+
+        
+        
+    }
+    return(0);
+
+}
